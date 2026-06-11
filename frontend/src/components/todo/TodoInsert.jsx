@@ -22,7 +22,7 @@ const TodoInsert = () => {
         e.preventDefault();
         try{
           registerMutation.mutateAsync(todo)
-          alert("등록 성공")
+
         }catch{
           alert("등록 실패")
         }

@@ -23,7 +23,6 @@ const TodoListChild = ({item}) => {
         setTodo(prev => ({...prev, checked: !todo.checked}))
         updateMutation.mutateAsync({...todo, checked: !todo.checked});
         setEditing(false);
-        alert("토글 성공")
       }catch{
         alert("토글 실패")
       }
@@ -35,7 +34,6 @@ const TodoListChild = ({item}) => {
           try{
             updateMutation.mutateAsync(todo);
             setEditing(false);
-            alert("수정 성공")
           }catch{
             alert("수정 실패")
           }

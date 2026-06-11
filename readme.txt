@@ -22,6 +22,11 @@ http://localhost:8080
 (6/10)362e00e8f5a4434eb9d1f7dea9ddb2c4
 (6/11)3c9b14bde8df405ba4838b4aa00edefe
 
+연결 안될때
+1. docker exec -u root -it jenkins bash
+2. ls -l /var/run/docker.sock
+3. chmod 666 /var/run/docker.sock
+
 캐시가 안사라지면 순서대로 복붙(마지막에 docker ps -a해서 확인)
 docker rm -f jenkins
 
@@ -52,3 +57,9 @@ ls -al
 
 도커 버전 확인
 docker --version
+
+==========================
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64" \
+-o /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose

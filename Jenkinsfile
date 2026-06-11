@@ -6,7 +6,7 @@ pipeline {
         stage('Git Clone') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/본인아이디/저장소명.git'
+                    url: 'https://github.com/ysz0612/react-query-json-sever-project.git'
             }
         }
 

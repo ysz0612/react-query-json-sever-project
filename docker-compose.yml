@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    depends_on:
+      - json-server
+    restart: always
+
+  json-server:
+    image: node:22-alpine
+    container_name: json-server
+    working_dir: /app
+    volumes:
+      - ./frontend/server:/app
+    command: sh -c "npm install && npx json-server db.json --host 0.0.0.0 --port 3000"
+    ports:
+      - "3000:3000"
+    restart: always
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+    restart: always
+
+  jenkins:
+    build:
+      context: .
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+volumes:
+  jenkins_home:

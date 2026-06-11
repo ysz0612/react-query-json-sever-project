@@ -1,22 +1,18 @@
-# Jenkins + Git + Node.js + Docker CLI
-
 FROM jenkins/jenkins:lts
 
 USER root
 
-# Git 설치
-RUN apt-get update && apt-get install -y git
-
-# Node.js 설치 (22 LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y nodejs
-
-# Docker CLI 설치
 RUN apt-get update && apt-get install -y \
-    ca-certificates \
+    git \
     curl \
+    wget \
+    unzip \
+    ca-certificates \
     gnupg \
     lsb-release
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
 
 RUN mkdir -p /etc/apt/keyrings
 
@@ -30,13 +26,5 @@ RUN echo \
     > /etc/apt/sources.list.d/docker.list
 
 RUN apt-get update && apt-get install -y docker-ce-cli
-
-# Jenkins Plugins
-RUN jenkins-plugin-cli --plugins \
-    git \
-    github \
-    workflow-aggregator \
-    docker-workflow \
-    nodejs
 
 USER jenkins
